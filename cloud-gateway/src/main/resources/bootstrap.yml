@@ -1,0 +1,21 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${spring-cloud-nacos-url:localhost}:${spring-cloud-nacos-port:8848}
+        enabled: true
+    gateway:
+      routes:
+        - id: cloud-auth
+          uri: lb://cloud-auth
+          predicates:
+            - Path=/auth/user/**
+        - id: cloud-article
+          uri: lb://cloud-article
+          predicates:
+            - Path=/article/**

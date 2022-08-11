@@ -1,0 +1,4 @@
+# Project exclude paths
+/cloud-article/target/
+/cloud-auth/target/
+/cloud-gateway/target/
