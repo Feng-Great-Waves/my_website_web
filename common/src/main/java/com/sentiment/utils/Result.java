@@ -26,6 +26,12 @@ public class Result<T> {
         return new Result<T>(HTTP_OK, data, message);
     }
 
+    /**
+     * 错误500
+     * @param message 信息
+     * @param <T>
+     * @return
+     */
     public static <T> Result<T> fail(String message) {
         return new Result<T>(HTTP_INTERNAL_ERROR, null, message);
     }
