@@ -60,8 +60,6 @@ public class Oauth2AuthorizationAdapter extends AuthorizationServerConfigurerAda
         defaultTokenServices.setClientDetailsService(clientDetailsService);
         defaultTokenServices.setSupportRefreshToken(false);
         defaultTokenServices.setTokenStore(tokenStore);
-        defaultTokenServices.setAccessTokenValiditySeconds(300);
-        //defaultTokenServices.setRefreshTokenValiditySeconds(300);
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenConverter));
         defaultTokenServices.setTokenEnhancer(tokenEnhancerChain);

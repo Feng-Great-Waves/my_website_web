@@ -1,8 +1,7 @@
-package com.sentiment.controller;
+package com.sentiment.controller.feign;
 
 import com.sentiment.model.UserInfo;
 import com.sentiment.service.IUserInfoService;
-import com.sentiment.utils.Result;
 import com.sentiment.utils.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,19 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author Fwt
  * @version 1.0
- * @date 2022/8/11 15:33
+ * @date 2022/8/13 13:51
  */
 @RestController
-@RequestMapping("/auth/user")
-public class UserInfoController {
-
+@RequestMapping("/auth/feign")
+public class UserInfoFeignController {
     @Autowired
     private IUserInfoService userInfoService;
 
-    @GetMapping("/userinfo")
-    public Result<?> getUserInfo(){
+    @GetMapping("/usernick")
+    public String getUserNick(){
         UserInfo userInfo = userInfoService.getUserInfo(SecurityUtil.getUserName());
-        return Result.ok(userInfo);
+        return userInfo.getNickName();
     }
-
 }

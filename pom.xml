@@ -11,8 +11,8 @@
         <module>cloud-auth</module>
         <module>cloud-gateway</module>
         <module>common</module>
-        <module>cloud-user-center</module>
         <module>cloud-article</module>
+        <module>cloud-oss</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -35,7 +35,7 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2.2.1.RELEASE</version>
+                <version>2021.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -44,7 +44,6 @@
                 <artifactId>hutool-all</artifactId>
                 <version>5.7.4</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>

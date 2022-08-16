@@ -1,4 +1,4 @@
-package com.sentiment.com.sentiment.config;
+package com.sentiment.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

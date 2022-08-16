@@ -27,8 +27,8 @@ public class GlobalExceptionHandler
     @ExceptionHandler(ServiceException.class)
     public Result<?> handleServiceException(ServiceException e)
     {
+        log.info(e.getMessage());
         return Result.fail(e.getMessage());
     }
-
 
 }

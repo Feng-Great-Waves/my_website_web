@@ -11,6 +11,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public class SecurityUtil {
 
+    /**
+     * 获取当前登录用户名
+     * @return 用户名
+     */
     public static String getUserName(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SysUserDetails principal = (SysUserDetails) authentication.getPrincipal();

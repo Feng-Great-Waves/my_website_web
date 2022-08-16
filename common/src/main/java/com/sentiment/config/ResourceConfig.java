@@ -1,5 +1,6 @@
 package com.sentiment.config;
 
+import com.sentiment.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,6 +27,9 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
 
         resources.resourceId("$Jt0ufW")
                 .tokenStore(tokenStore)
+                .accessDeniedHandler((request, response, exception)->{
+                    Result.fail(exception.getMessage());
+                })
                 .stateless(true);
     }
 
@@ -39,4 +43,5 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
+
 }
