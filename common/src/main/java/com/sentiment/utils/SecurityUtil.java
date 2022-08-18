@@ -20,4 +20,14 @@ public class SecurityUtil {
         SysUserDetails principal = (SysUserDetails) authentication.getPrincipal();
         return principal.getUsername();
     }
+
+    /**
+     * 获取当前登录id
+     * @return 用户名
+     */
+    public static Long getUserId(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SysUserDetails principal = (SysUserDetails) authentication.getPrincipal();
+        return principal.getId();
+    }
 }

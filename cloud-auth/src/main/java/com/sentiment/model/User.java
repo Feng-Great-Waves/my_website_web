@@ -22,7 +22,6 @@ public class User implements Serializable {
     private String userName;
     private String password;
     private String userIdentity;
-    private Long userId;
     private Integer status;
     private String userType;
     @TableField(fill = FieldFill.INSERT)

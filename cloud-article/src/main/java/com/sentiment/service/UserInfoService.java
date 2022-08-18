@@ -1,5 +1,6 @@
 package com.sentiment.service;
 
+import com.sentiment.feign.model.UserInfoFeign;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Service
 @FeignClient(value = "cloud-auth",path = "/auth/feign")
 public interface UserInfoService {
-
-    @GetMapping("/usernick")
-    String getUserNick();
+    /**
+     * 获取当前登入用户昵称
+     * @return
+     */
+    @GetMapping("/userinfo")
+    UserInfoFeign getUserInfo();
 }

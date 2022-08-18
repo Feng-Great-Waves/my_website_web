@@ -15,7 +15,6 @@ import java.util.Date;
 @Data
 @TableName("sys_user_info")
 public class UserInfo {
-    @TableId(type = IdType.AUTO)
     private Long id;
     private String userName;
     private String nickName;

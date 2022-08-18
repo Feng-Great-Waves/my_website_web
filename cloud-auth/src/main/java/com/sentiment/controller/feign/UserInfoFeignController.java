@@ -1,5 +1,6 @@
 package com.sentiment.controller.feign;
 
+import com.sentiment.feign.model.UserInfoFeign;
 import com.sentiment.model.UserInfo;
 import com.sentiment.service.IUserInfoService;
 import com.sentiment.utils.SecurityUtil;
@@ -19,9 +20,15 @@ public class UserInfoFeignController {
     @Autowired
     private IUserInfoService userInfoService;
 
-    @GetMapping("/usernick")
+    @GetMapping("/userinfo")
+    public UserInfoFeign getUserNick(){
+        UserInfo userInfo = userInfoService.getById(SecurityUtil.getUserId());
+        return new UserInfoFeign(userInfo.getId(), userInfo.getUserName(), userInfo.getNickName());
+    }
+
+/*    @GetMapping("/usernick")
     public String getUserNick(){
         UserInfo userInfo = userInfoService.getUserInfo(SecurityUtil.getUserName());
         return userInfo.getNickName();
-    }
+    }*/
 }

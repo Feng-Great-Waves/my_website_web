@@ -21,9 +21,12 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SysUserDetails implements UserDetails {
+    private static final long serialVersionUID = 144135802389020197L;
+    private Long id;
     private String username;
     private String password;
     List<SimpleGrantedAuthority> authorities;
+
 
     @Override
     public boolean isAccountNonExpired() {

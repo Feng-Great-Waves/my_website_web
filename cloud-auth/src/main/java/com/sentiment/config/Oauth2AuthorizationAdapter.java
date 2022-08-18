@@ -45,7 +45,6 @@ public class Oauth2AuthorizationAdapter extends AuthorizationServerConfigurerAda
     private JwtAccessTokenConverter tokenConverter;
     @Autowired
     private AuthenticationManager authenticationManager;
-    //配置客户端
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         JdbcClientDetailsService clientDetailsService = new JdbcClientDetailsService(dataSource);

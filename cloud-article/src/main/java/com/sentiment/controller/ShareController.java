@@ -31,6 +31,7 @@ public class ShareController {
     @GetMapping("/alllist/{tag}")
     public Result<?> getAllShareList(@PathVariable String tag){
         List<ShareVo> listPageInfo = shareService.allShareVoList(tag);
+        System.out.println(userInfoService.getUserInfo());
         return Result.ok(listPageInfo);
     }
 

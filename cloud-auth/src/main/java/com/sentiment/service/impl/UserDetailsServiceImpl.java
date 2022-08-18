@@ -34,6 +34,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         ArrayList<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
         simpleGrantedAuthorities.add(new SimpleGrantedAuthority(UserConstant.ROLE_PREFIX+user.getUserIdentity()));
-        return new SysUserDetails(s, user.getPassword(), simpleGrantedAuthorities);
+        return new SysUserDetails(user.getId(),s, user.getPassword(), simpleGrantedAuthorities);
     }
 }
