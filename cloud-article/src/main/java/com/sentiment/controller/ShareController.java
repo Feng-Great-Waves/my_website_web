@@ -11,6 +11,7 @@ import com.sentiment.service.OssService;
 import com.sentiment.service.ShareService;
 import com.sentiment.service.UserInfoService;
 import com.sentiment.utils.Result;
+import com.sentiment.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,12 +57,16 @@ public class ShareController {
         String oldFilename = file.getOriginalFilename();
         //获取文件后缀 .jpg
         String extension = oldFilename.substring(oldFilename.lastIndexOf("."));
-        if(FileConstant.JPG_SUFFIX.equals(extension)||FileConstant.PNG_SUFFIX.equals(extension)){
-            String s = ossService.uploadImage(file, userInfoService.getUserInfo().getId().toString());
-            object.setCover(s);
-        }else {
+        if(!(FileConstant.JPG_SUFFIX.equals(extension)
+                ||FileConstant.PNG_SUFFIX.equals(extension)
+                ||FileConstant.GIF_SUFFIX.equals(extension))){
             throw new ServiceException("操作失败");
         }
+        String s = ossService.uploadImage(file, userInfoService.getUserInfo().getId().toString());
+        if (StringUtils.isEmpty(s)){
+            throw new ServiceException("操作失败");
+        }
+        object.setCover(s);
         shareService.save(object);
         return Result.ok("操作成功");
     }

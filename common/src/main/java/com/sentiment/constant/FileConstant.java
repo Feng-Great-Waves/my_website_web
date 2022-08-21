@@ -9,6 +9,7 @@ public class FileConstant {
 
     public static final String JPG_SUFFIX = ".jpg";
     public static final String PNG_SUFFIX = ".png";
-    public static final String THE_DEFAULT_IMAGE ="/image/";
+    public static final String GIF_SUFFIX = ".gif";
+    public static final String THE_DEFAULT_IMAGE ="/image/default_image.gif";
 
 }

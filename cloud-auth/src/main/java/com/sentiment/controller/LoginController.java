@@ -4,10 +4,14 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.core.lang.UUID;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.sentiment.constant.Constants;
+import com.sentiment.model.UserInfo;
 import com.sentiment.model.dto.LoginUserDto;
+import com.sentiment.service.IUserInfoService;
 import com.sentiment.service.IUserLoginService;
 import com.sentiment.utils.RedisCache;
 import com.sentiment.utils.Result;
+import com.sentiment.utils.SecurityUtil;
+import com.sentiment.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -37,6 +42,10 @@ public class LoginController {
 
     @Autowired
     private IUserLoginService userLoginService;
+
+    @Autowired
+    private IUserInfoService userInfoService;
+
 
     @GetMapping("/captchaImage")
     public Result<?> getCodeImage(){
@@ -68,6 +77,10 @@ public class LoginController {
     @PostMapping("/login")
     public Result<?> userLogin(@RequestBody LoginUserDto loginUser){
         String token = userLoginService.login(loginUser);
+        UserInfo userInfo = userInfoService.getUserInfo(loginUser.getUserName());
+        if (!StringUtils.isEmpty(token)&& !Objects.isNull(userInfo)){
+            redisCache.setCacheObject(token,userInfo,3600,TimeUnit.SECONDS);
+        }
         return Result.ok(token,"登入成功");
     }
 }
