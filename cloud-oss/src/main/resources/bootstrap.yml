@@ -1,5 +1,20 @@
 server:
   port: 8205
 
+spring:
+  application:
+    name: cloud-oss
+  #数据源配置信息
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${mysql.ipaddress:localhost}:${mysql.port:3307}/cloud-auth?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
 
+picture:
+  dir: D:/home/sentiment/uploadPath/image/
 

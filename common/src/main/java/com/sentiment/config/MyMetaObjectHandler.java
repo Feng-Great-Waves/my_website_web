@@ -27,7 +27,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         this.setFieldValByName("tourNum",0,metaObject);
         this.setFieldValByName("thumbsUp",0,metaObject);
         this.setFieldValByName("toExamine",0,metaObject);
-        this.setFieldValByName("isDelete",0,metaObject);
+        this.setFieldValByName("isDeleted",0,metaObject);
     }
     @Override
     public void updateFill(MetaObject metaObject) {

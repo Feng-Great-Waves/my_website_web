@@ -19,3 +19,7 @@ spring:
           uri: lb://cloud-article
           predicates:
             - Path=/article/**
+        - id: cloud-oss
+          uri: lb://cloud-oss
+          predicates:
+            - Path=/image/**

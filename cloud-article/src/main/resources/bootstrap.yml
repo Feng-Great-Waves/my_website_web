@@ -18,9 +18,6 @@ spring:
         file-extension: yaml
         group: DEFAULT_GROUP
 
-logging:
-  level:
-    com.spring.cloud.auth.mapper: debug
 #mybatis-plus:
 #  global-config:
 #    db-config:
@@ -39,3 +36,11 @@ logging:
 #    web:
 #      exposure:
 #        include: "*"
+logging:
+  charset:
+    console: utf-8
+  pattern:
+    console: "%d - %msg%n"
+  level:
+    root: info
+

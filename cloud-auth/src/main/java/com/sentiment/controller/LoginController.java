@@ -2,7 +2,6 @@ package com.sentiment.controller;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.lang.UUID;
-import com.google.code.kaptcha.Producer;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.sentiment.constant.Constants;
 import com.sentiment.model.dto.LoginUserDto;
@@ -10,10 +9,8 @@ import com.sentiment.service.IUserLoginService;
 import com.sentiment.utils.RedisCache;
 import com.sentiment.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;

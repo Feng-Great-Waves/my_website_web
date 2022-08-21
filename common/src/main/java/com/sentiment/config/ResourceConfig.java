@@ -39,6 +39,7 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/user/login").permitAll()
                 .antMatchers("/auth/user/captchaImage").permitAll()
+                .antMatchers("/image/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
