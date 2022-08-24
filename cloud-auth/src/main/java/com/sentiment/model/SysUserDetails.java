@@ -22,11 +22,14 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class SysUserDetails implements UserDetails {
     private static final long serialVersionUID = 144135802389020197L;
-    private Long id;
     private String username;
     private String password;
-    List<SimpleGrantedAuthority> authorities;
+    Collection<? extends GrantedAuthority> authorities;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -42,7 +45,6 @@ public class SysUserDetails implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
         return true;

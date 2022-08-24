@@ -10,8 +10,6 @@ import com.sentiment.model.dto.ShareDto;
 import com.sentiment.model.vo.ShareVo;
 import com.sentiment.service.ShareService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
@@ -24,9 +22,6 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ShareServiceImpl extends ServiceImpl<ShareMapper, Share> implements ShareService {
-
-    @Autowired
-    private DiscoveryClient discoveryClient;
     /**
      * 根据类型获取文章数据
      * @param tag 类型
@@ -40,7 +35,6 @@ public class ShareServiceImpl extends ServiceImpl<ShareMapper, Share> implements
             for (String itemTag : item.getTags()) {
                 if (itemTag.equals(tag)) {
                     BeanUtils.copyProperties(item, shareVo);
-                    shareVo.setCover(discoveryClient.getInstances("cloud-gateway").toString()+"/image/"+shareVo.getCover());
                 }
             }
             return shareVo;
@@ -57,12 +51,15 @@ public class ShareServiceImpl extends ServiceImpl<ShareMapper, Share> implements
      */
     @Override
     public PageInfo<ShareVo> pageShareVoList(ShareDto shareDto) {
+        long count = count();
         PageHelper.startPage(shareDto.getPageNum(),shareDto.getPageSize());
-       return new PageInfo<>(list(new LambdaQueryWrapper<Share>().orderByDesc(Share::getUpdateTime)).stream().map(item->{
+        List<Share> list = list(new LambdaQueryWrapper<Share>().orderByDesc(Share::getUpdateTime));
+        PageInfo<ShareVo> shareVoPageInfo = new PageInfo<>(list.stream().map(item -> {
             ShareVo shareVo = new ShareVo();
-            BeanUtils.copyProperties(item,shareVo);
-            shareVo.setCover(discoveryClient.getInstances("cloud-gateway").toString()+"/image/"+shareVo.getCover());
+            BeanUtils.copyProperties(item, shareVo);
             return shareVo;
         }).collect(Collectors.toList()));
+        shareVoPageInfo.setTotal(count);
+        return shareVoPageInfo;
     }
 }

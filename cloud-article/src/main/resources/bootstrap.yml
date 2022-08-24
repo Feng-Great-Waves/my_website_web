@@ -13,29 +13,25 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-      config:
-        prefix: common
-        file-extension: yaml
-        group: DEFAULT_GROUP
 
-#mybatis-plus:
-#  global-config:
-#    db-config:
-#      logic-delete-field: is_deleted # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
-#      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
-#      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#pagehelper:
-#  auto-dialect: on  #分页插件会自动检测当前的数据库链接，自动选择合适的分页方式
-#  reasonable: true #分页合理化参数，默认值为 false 。当该参数设置为 true 时， pageNum<=0 时会查询第一页， pageNum>pages （超过总数时），会查询最后一页
-#  support-methods-arguments: true #支持通过Mapper接口参数传递page参数,默认值为false
-#  page-size-zero: true #默认值为 false ，当该参数设置为 true 时，如果 pageSize=0 或者 RowBounds.limit =0 就会查询出全部的结果（相当于没有执行分页查询，但是返回结果仍然是 Page 类型）
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: is_deleted # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+pagehelper:
+  auto-dialect: on  #分页插件会自动检测当前的数据库链接，自动选择合适的分页方式
+  reasonable: true #分页合理化参数，默认值为 false 。当该参数设置为 true 时， pageNum<=0 时会查询第一页， pageNum>pages （超过总数时），会查询最后一页
+  support-methods-arguments: true #支持通过Mapper接口参数传递page参数,默认值为false
+  page-size-zero: true #默认值为 false ，当该参数设置为 true 时，如果 pageSize=0 或者 RowBounds.limit =0 就会查询出全部的结果（相当于没有执行分页查询，但是返回结果仍然是 Page 类型）
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 logging:
   charset:
     console: utf-8

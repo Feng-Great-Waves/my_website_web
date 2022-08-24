@@ -52,7 +52,6 @@ public class Oauth2AuthorizationAdapter extends AuthorizationServerConfigurerAda
         clients.withClientDetails(clientDetailsService);
 
     }
-
     @Bean
     public AuthorizationServerTokenServices tokenServices() {
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
@@ -64,7 +63,6 @@ public class Oauth2AuthorizationAdapter extends AuthorizationServerConfigurerAda
         defaultTokenServices.setTokenEnhancer(tokenEnhancerChain);
         return defaultTokenServices;
     }
-
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.authenticationManager(authenticationManager)
@@ -72,7 +70,6 @@ public class Oauth2AuthorizationAdapter extends AuthorizationServerConfigurerAda
                 .tokenServices(tokenServices())
                 .allowedTokenEndpointRequestMethods(HttpMethod.POST);
     }
-
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
         security.tokenKeyAccess("permitAll()")

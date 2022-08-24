@@ -2,10 +2,13 @@ package com.sentiment.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.sentiment.constant.UserConstant;
+import com.sentiment.mapper.SysPermissionMapper;
+import com.sentiment.model.SysUser;
 import com.sentiment.model.SysUserDetails;
-import com.sentiment.model.User;
 import com.sentiment.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +16,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Fwt
@@ -23,17 +28,22 @@ import java.util.ArrayList;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private ISysUserService sysUserService;
+    @Autowired
+    private SysPermissionMapper sysPermissionMapper;
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = sysUserService.getOne(new LambdaQueryWrapper<User>().eq(User::getUserName, s));
+        SysUser user = sysUserService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserName, s));
         if(user == null){
             throw new UsernameNotFoundException("账户不存在");
         }
         if(UserConstant.DISABLE_STATUS == user.getStatus()){
             throw new UsernameNotFoundException("账户被禁用");
         }
-        ArrayList<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
-        simpleGrantedAuthorities.add(new SimpleGrantedAuthority(UserConstant.ROLE_PREFIX+user.getUserIdentity()));
-        return new SysUserDetails(user.getId(),s, user.getPassword(), simpleGrantedAuthorities);
+        List<String> authorities = sysPermissionMapper.getAuthorities(user.getId());
+        Collection<GrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
+        for (String authority : authorities) {
+            simpleGrantedAuthorities.add(new SimpleGrantedAuthority(authority));
+        }
+        return new SysUserDetails(s, user.getPassword(), simpleGrantedAuthorities);
     }
 }
